@@ -7,12 +7,6 @@ const StyledCheckbox = styled.input`
   padding: 5px;
 `;
 
-const Checkbox = () => {
-  return (
-    <div>
-      <StyledCheckbox type="checkbox" />
-    </div>
-  );
-};
+const Checkbox = () => <StyledCheckbox type="checkbox" />;
 
 export default Checkbox;

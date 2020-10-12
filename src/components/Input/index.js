@@ -7,12 +7,6 @@ const StyledInput = styled.input`
   padding: 5px;
 `;
 
-const Input = () => {
-  return (
-    <div>
-      <StyledInput type="text" />
-    </div>
-  );
-};
+const Input = () => <StyledInput type="text" />;
 
 export default Input;
