@@ -1,7 +1,13 @@
 import React from 'react';
+import Form from './components/Form';
 
 const App = () => {
-  return <div>Events Form App</div>;
+  return (
+    <>
+      <h1>This is Events App</h1>
+      <Form />
+    </>
+  );
 };
 
 export default App;
