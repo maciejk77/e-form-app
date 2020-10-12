@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import Select from '../Select';
+import Label from '../Label';
 import Input from '../Input';
+import Wrapper from '../Wrapper';
+import Checkbox from '../Checkbox';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCoordinators, fetchResponsible } from '../../actions';
 
@@ -19,18 +23,49 @@ const Form = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <label>Coordinator</label>
-      <Select options={coordinators} />
-      <label>Responsible</label>
-      <Select options={responsible} />
+      <Wrapper>
+        <Label label="Coordinators" />
+        <Select options={coordinators} />
+      </Wrapper>
+      <Wrapper>
+        <Label label="Responsiblity" />
+        <Select options={responsible} />
+      </Wrapper>
 
-      <Input label="Title" />
-      <Input label="Description" />
-      <Input label="Date" />
-      <Input label="Paid Event Y/N" type="checkbox" />
-      <Input label="Event Fee" />
-      <Input label="Reward" />
-      <Input label="Duration" />
+      <Wrapper>
+        <Label label="Title" />
+        <Input />
+      </Wrapper>
+
+      <Wrapper>
+        <Label label="Description" />
+        <Input />
+      </Wrapper>
+
+      <Wrapper>
+        <Label label="Paid Event" />
+        <Checkbox />
+      </Wrapper>
+
+      <Wrapper>
+        <Label label="Event Fee" />
+        <Input />
+      </Wrapper>
+
+      <Wrapper>
+        <Label label="Reward" />
+        <Input />
+      </Wrapper>
+
+      <Wrapper>
+        <Label label="Date" />
+        <Input />
+      </Wrapper>
+
+      <Wrapper>
+        <Label label="Duration" />
+        <Input />
+      </Wrapper>
     </div>
   );
 };
