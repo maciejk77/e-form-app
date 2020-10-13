@@ -1,23 +1,28 @@
 import React from 'react';
 import { LAST_NAME } from '../../constants';
+import { StyledSelect, StyledOption } from './styles';
 
 const Select = ({ options }) => {
   const hasLastName = options.every((op) => LAST_NAME in op);
-  const completeName = (option) =>
-    hasLastName ? `${option.name} ${option.lastname}` : option.name;
+
+  const formattedOptions = options.reduce((acc, el) => {
+    const newName = `${hasLastName ? `${el.name} ${el.lastname}` : el.name}`;
+    return [...acc, { id: el.id, name: newName }];
+  }, []);
 
   return (
-    <select
+    <StyledSelect
       name="type"
       // onChange={handleFormItemChange}
       // value={type}
     >
-      {options.map((option) => (
-        <option key={option.id} value={completeName(option)}>
-          {completeName(option)}
-        </option>
+      <StyledOption label="--- select ---" value=""></StyledOption>
+      {formattedOptions.map((option) => (
+        <StyledOption key={option.id} value={option.name}>
+          {option.name}
+        </StyledOption>
       ))}
-    </select>
+    </StyledSelect>
   );
 };
 

@@ -1,11 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const StyledCheckbox = styled.input`
-  border: 1px solid red;
-  outline: none;
-  padding: 5px;
-`;
+import StyledCheckbox from './styles';
 
 const Checkbox = () => <StyledCheckbox type="checkbox" />;
 

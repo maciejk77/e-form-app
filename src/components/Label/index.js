@@ -1,12 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import StyledLabel from './styles';
 
-const StyledLabel = styled.label`
-  font-size: 16px;
-  font-family: 'Arial';
-  padding: 0 2px;
-`;
-
-const Label = ({ label }) => <StyledLabel>{label}</StyledLabel>;
+const Label = ({ htmlFor }) => <StyledLabel>{htmlFor}</StyledLabel>;
 
 export default Label;

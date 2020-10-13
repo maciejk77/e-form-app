@@ -1,4 +1,3 @@
-export const ADD = 'ADD';
 export const FETCH_COORDINATORS = 'FETCH_COORDINATORS';
 export const FETCH_RESPONSIBLE = 'FETCH_RESPONSIBLE';
 
