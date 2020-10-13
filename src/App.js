@@ -4,7 +4,7 @@ import Form from './components/Form';
 const App = () => {
   return (
     <>
-      <h1>This is Events App</h1>
+      <h1>Events Form</h1>
       <Form />
     </>
   );

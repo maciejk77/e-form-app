@@ -5,8 +5,9 @@ const StyledButton = styled.button`
   border: 1px solid red;
   color: red;
   font-family: 'Arial';
-  font-size: 20px;
+  font-size: 18px;
   outline: none;
+  padding: 5px;
   width: 200px;
 `;
 

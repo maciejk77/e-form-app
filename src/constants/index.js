@@ -10,13 +10,17 @@ export const LAST_NAME = 'lastname';
 export const INITIAL_DATA = {
   title: '',
   description: '',
-  category_id: 0,
+  category_id: '',
   paid_event: false,
-  event_fee: 0,
-  reward: 0,
-  duration: 0,
+  event_fee: '',
+  reward: '',
+  date: '',
+  duration: '',
   coordinator: {
     email: '',
     id: '',
   },
 };
+
+export const datePattern =
+  '(?:19|20)(?:(?:[13579][26]|[02468][048])-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))|(?:[0-9]{2}-(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:29|30))|(?:(?:0[13578]|1[02])-31)))';
