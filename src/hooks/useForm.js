@@ -6,14 +6,14 @@ const useForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(JSON.stringify(formState, null, 2));
+    console.log('after submission => ', formState);
+    // add to events array on redux
+    // setFormState(INITIAL_DATA);
   };
 
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
-    console.log('name => ', name);
-    console.log('value => ', value);
     setFormState({ ...formState, [name]: value });
   };
 
