@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import useForm from '../../hooks/useForm';
 
 import Button from '../Button';
@@ -11,12 +11,11 @@ import Wrapper from '../Wrapper';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCoordinators, fetchResponsible } from '../../actions';
-import { datePattern } from '../../constants';
+import { datePattern, SWITCH_PAYMENT_STATUS } from '../../constants';
 
 const Form = () => {
   const dispatch = useDispatch();
   const { formState, handleChange, handleSubmit } = useForm();
-  const [isPaid, setIsPaid] = useState(false);
 
   useEffect(() => {
     dispatch(fetchCoordinators());
@@ -36,18 +35,28 @@ const Form = () => {
     >
       <Wrapper>
         <Label htmlFor="coordinators">Coordinators</Label>
-        <Select options={coordinators} />
+        <Select
+          onChange={handleChange}
+          options={coordinators}
+          name="coordinator"
+        />
       </Wrapper>
 
       <Wrapper>
-        <Label htmlFor="responsible">Responsible</Label>
-        <Select options={responsible} />
+        <Label htmlFor="responsible">Responsibility</Label>
+
+        <Select
+          onChange={handleChange}
+          options={responsible}
+          name="responsible"
+        />
       </Wrapper>
 
       <Wrapper>
         <Label htmlFor="title">Title</Label>
         <Input
           onChange={handleChange}
+          placeholder="[text here]"
           name="title"
           type="text"
           required
@@ -59,26 +68,30 @@ const Form = () => {
         <Label htmlFor="description">Description</Label>{' '}
         <Textarea
           onChange={handleChange}
+          placeholder="[text here]"
           name="description"
           maxLength={140}
           required
           type="text"
           value={formState.description}
         />
-        <Label>count: {formState.description.length}</Label>
+        <Label>({formState.description.length})</Label>
       </Wrapper>
 
-      <Wrapper>
-        <Label htmlFor="paid event">Paid Event</Label>
-        <Checkbox />
-        {/* <Label>{isPaid ? 'Paid' : 'Free'}</Label> */}
-      </Wrapper>
+      <span>
+        <Checkbox
+          name="paid_fee"
+          onClick={() => dispatch({ type: SWITCH_PAYMENT_STATUS })}
+        />
+        <Label htmlFor="paid event">Payment</Label>
+      </span>
 
-      {formState.paid_event && (
+      {!formState.paid_event && (
         <Wrapper>
           <Label htmlFor="event fee">Event Fee</Label>
           <Input
             onChange={handleChange}
+            placeholder="[numbers here]"
             name="event_fee"
             type="number"
             value={formState.event_fee}
@@ -90,6 +103,7 @@ const Form = () => {
         <Label htmlFor="reward">Reward</Label>
         <Input
           onChange={handleChange}
+          placeholder="[numbers here]"
           name="reward"
           type="number"
           value={formState.reward}
@@ -107,20 +121,32 @@ const Form = () => {
           type="date"
           value={formState.date}
         />
+        <Input
+          onChange={handleChange}
+          name="time"
+          // pattern={datePattern}
+          // placeholder="YYYY-MM-DD"
+          required
+          type="time"
+        />
       </Wrapper>
 
       <Wrapper>
         <Label htmlFor="duration">Duration</Label>
         <Input
           onChange={handleChange}
+          placeholder="[numbers here]"
           name="duration"
           type="number"
           value={formState.duration}
         />
       </Wrapper>
-      <Wrapper>
+
+      <div
+        style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}
+      >
         <Button label="Submit" type="submit" />
-      </Wrapper>
+      </div>
     </form>
   );
 };
