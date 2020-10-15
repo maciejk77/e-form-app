@@ -1,22 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import useForm from '../../hooks/useForm';
 
 import Button from '../Button';
 import Checkbox from '../Checkbox';
 import Input from '../Input';
 import Label from '../Label';
+import Modal from '../Modal/index';
+import Row from '../Row';
 import Select from '../Select';
 import Textarea from '../Textarea';
 import Wrapper from '../Wrapper';
-import Row from '../Row';
+import useStyles from './styles';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCoordinators, fetchResponsible } from '../../actions';
-import { SWITCH_PAYMENT_STATUS } from '../../constants';
 
 const Form = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
-  const { form, handleChange, handleSubmit } = useForm();
+  const [isOpen, setIsOpen] = useState(true);
+  const { form, handleChange, handleSubmit } = useForm(setIsOpen);
 
   useEffect(() => {
     dispatch(fetchCoordinators());
@@ -142,11 +145,16 @@ const Form = () => {
         />
       </Wrapper>
 
-      <div
-        style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}
-      >
+      {isOpen && (
+        <Modal onClick={() => setIsOpen(false)}>
+          <Label>Success!</Label>
+          <Label>Thank you for adding an event</Label>
+        </Modal>
+      )}
+
+      <Row>
         <Button label="Submit" type="submit" />
-      </div>
+      </Row>
     </form>
   );
 };

@@ -11,7 +11,7 @@ import {
   // DATE,
 } from '../constants';
 
-const useForm = () => {
+const useForm = (callback) => {
   const [form, setForm] = useState(INITIAL_DATA);
   // const [time, setTime] = useState('');
 
@@ -26,6 +26,8 @@ const useForm = () => {
     // merge time into date
     // remove time property from form
     console.log('after SUBMIT => ', form);
+    setForm(INITIAL_DATA);
+    callback(true);
   };
 
   const handleChange = (e) => {
