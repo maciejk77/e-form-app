@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import useForm from '../../hooks/useForm';
 
 import Button from '../Button';
 import Checkbox from '../Checkbox';
@@ -12,29 +11,42 @@ import Textarea from '../Textarea';
 import Wrapper from '../Wrapper';
 import useStyles from './styles';
 
+import { UPDATE_FORM } from '../../constants';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCoordinators, fetchResponsible } from '../../actions';
 
 const Form = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [isOpen, setIsOpen] = useState(true);
-  const { form, handleChange, handleSubmit } = useForm(setIsOpen);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     dispatch(fetchCoordinators());
     dispatch(fetchResponsible());
   }, [dispatch]);
 
-  console.log('form => ', form);
-  // console.log('state => ', useSelector((state) => state));
+  // console.log('form => ', form);
+  // console.log(
+  //   'state => ',
+  //   useSelector((state) => state)
+  // );
 
+  const form = useSelector((state) => state.form);
   const coordinators = useSelector((state) => state.coordinators);
   const responsible = useSelector((state) => state.responsible);
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    dispatch({
+      type: UPDATE_FORM,
+      payload: { name, value },
+    });
+  };
+
   return (
     <form
-      onSubmit={handleSubmit}
+      // onSubmit={handleSubmit}
       style={{ display: 'flex', flexDirection: 'column' }}
     >
       <Wrapper>

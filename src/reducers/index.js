@@ -1,17 +1,41 @@
-import { FETCH_COORDINATORS, FETCH_RESPONSIBLE } from '../constants';
+import {
+  FETCH_COORDINATORS,
+  FETCH_RESPONSIBLE,
+  INITIAL_DATA,
+  UPDATE_FORM,
+} from '../constants';
 
 const initialState = {
-  events: [],
+  form: INITIAL_DATA,
   coordinators: [],
   responsible: [],
 };
 
-const rootReducer = (state = initialState, action) => {
-  switch (action.type) {
+const format = (name, value) => {
+  switch (name) {
+    case 'title':
+      return String(value);
+    default:
+      return value;
+  }
+};
+
+const rootReducer = (state = initialState, { type, payload }) => {
+  console.log('action.payload ===> ', payload);
+  switch (type) {
     case FETCH_COORDINATORS:
-      return { ...state, coordinators: action.payload };
+      return { ...state, coordinators: payload };
     case FETCH_RESPONSIBLE:
-      return { ...state, responsible: action.payload };
+      return { ...state, responsible: payload };
+    case UPDATE_FORM:
+      return {
+        ...state,
+        form: {
+          ...state.form,
+          [payload.name]: format(payload.name, payload.value),
+        },
+      };
+
     default:
       return state;
   }

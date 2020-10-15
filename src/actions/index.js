@@ -5,8 +5,6 @@ import {
   RESPONSIBLE_URL,
 } from '../constants';
 
-// TODO: refactor to fetchDataFor reusable function
-
 export const fetchCoordinators = () => async (dispatch) => {
   const response = await fetch(COORDINATOR_URL);
   const jsonResponse = await response.json();
