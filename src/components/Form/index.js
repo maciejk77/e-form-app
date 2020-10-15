@@ -8,21 +8,22 @@ import Label from '../Label';
 import Select from '../Select';
 import Textarea from '../Textarea';
 import Wrapper from '../Wrapper';
+import Row from '../Row';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCoordinators, fetchResponsible } from '../../actions';
-import { datePattern, SWITCH_PAYMENT_STATUS } from '../../constants';
+import { SWITCH_PAYMENT_STATUS } from '../../constants';
 
 const Form = () => {
   const dispatch = useDispatch();
-  const { formState, handleChange, handleSubmit } = useForm();
+  const { form, handleChange, handleSubmit } = useForm();
 
   useEffect(() => {
     dispatch(fetchCoordinators());
     dispatch(fetchResponsible());
   }, [dispatch]);
 
-  console.log('formState => ', formState);
+  console.log('form => ', form);
   // console.log('state => ', useSelector((state) => state));
 
   const coordinators = useSelector((state) => state.coordinators);
@@ -60,7 +61,7 @@ const Form = () => {
           name="title"
           type="text"
           required
-          value={formState.title}
+          value={form.title}
         />
       </Wrapper>
 
@@ -73,20 +74,22 @@ const Form = () => {
           maxLength={140}
           required
           type="text"
-          value={formState.description}
+          value={form.description}
         />
-        <Label>({formState.description.length})</Label>
+        <Label>({form.description.length})</Label>
       </Wrapper>
 
-      <span>
+      <Row>
         <Checkbox
-          name="paid_fee"
-          onClick={() => dispatch({ type: SWITCH_PAYMENT_STATUS })}
+          name="paid_event"
+          onChange={handleChange}
+          checked={form.paid_event ? 'on' : 'off'}
+          value={form.paid_event ? 'on' : 'off'}
         />
         <Label htmlFor="paid event">Payment</Label>
-      </span>
+      </Row>
 
-      {!formState.paid_event && (
+      {form.paid_event && ( // switch to true, temporary for testing here
         <Wrapper>
           <Label htmlFor="event fee">Event Fee</Label>
           <Input
@@ -94,7 +97,7 @@ const Form = () => {
             placeholder="[numbers here]"
             name="event_fee"
             type="number"
-            value={formState.event_fee}
+            value={form.event_fee}
           />
         </Wrapper>
       )}
@@ -106,7 +109,7 @@ const Form = () => {
           placeholder="[numbers here]"
           name="reward"
           type="number"
-          value={formState.reward}
+          value={form.reward}
         />
       </Wrapper>
 
@@ -116,17 +119,14 @@ const Form = () => {
           onChange={handleChange}
           name="date"
           // pattern={datePattern}
-          // placeholder="YYYY-MM-DD"
           required
           type="date"
-          value={formState.date}
+          value={form.date}
         />
         <Input
           onChange={handleChange}
           name="time"
-          // pattern={datePattern}
-          // placeholder="YYYY-MM-DD"
-          required
+          // pattern={timePattern}
           type="time"
         />
       </Wrapper>
@@ -138,7 +138,7 @@ const Form = () => {
           placeholder="[numbers here]"
           name="duration"
           type="number"
-          value={formState.duration}
+          value={form.duration}
         />
       </Wrapper>
 
