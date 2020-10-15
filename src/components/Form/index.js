@@ -26,11 +26,10 @@ const Form = () => {
     dispatch(fetchResponsible());
   }, [dispatch]);
 
-  // console.log('form => ', form);
-  // console.log(
-  //   'state => ',
-  //   useSelector((state) => state)
-  // );
+  console.log(
+    'FORM => ',
+    useSelector((state) => state)
+  );
 
   const form = useSelector((state) => state.form);
   const coordinators = useSelector((state) => state.coordinators);

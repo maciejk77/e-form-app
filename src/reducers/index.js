@@ -21,7 +21,7 @@ const format = (name, value) => {
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
-  console.log('action.payload ===> ', payload);
+  // console.log('action.payload ===> ', payload);
   switch (type) {
     case FETCH_COORDINATORS:
       return { ...state, coordinators: payload };
