@@ -11,10 +11,15 @@ import Textarea from '../Textarea';
 import Wrapper from '../Wrapper';
 import useStyles from './styles';
 
-import { UPDATE_FORM } from '../../constants';
+import {
+  ADD_EVENT,
+  DATE_PATTERN,
+  TIME_PATTERN,
+  UPDATE_FORM,
+} from '../../constants';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCoordinators, fetchResponsible } from '../../actions';
+import { fetchCoordinators, fetchCategories } from '../../actions';
 
 const Form = () => {
   const classes = useStyles();
@@ -23,17 +28,17 @@ const Form = () => {
 
   useEffect(() => {
     dispatch(fetchCoordinators());
-    dispatch(fetchResponsible());
+    dispatch(fetchCategories());
   }, [dispatch]);
 
   console.log(
-    'FORM => ',
-    useSelector((state) => state)
+    'EVENTS => ',
+    useSelector((state) => state.events)
   );
 
   const form = useSelector((state) => state.form);
   const coordinators = useSelector((state) => state.coordinators);
-  const responsible = useSelector((state) => state.responsible);
+  const categories = useSelector((state) => state.categories);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,13 +48,28 @@ const Form = () => {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const { date, time } = form;
+    const newDate = `${date}T${time}`;
+    delete form.time;
+    const output = { ...form, date: newDate };
+
+    // setIsOpen(true);
+    console.clear();
+    console.log('--- output after SUBMIT ---');
+    console.log(output);
+    dispatch({ type: ADD_EVENT, payload: output });
+  };
+
   return (
     <form
-      // onSubmit={handleSubmit}
+      onSubmit={handleSubmit}
       style={{ display: 'flex', flexDirection: 'column' }}
     >
       <Wrapper>
-        <Label htmlFor="coordinators">Coordinators</Label>
+        <Label htmlFor="coordinator">Coordinators</Label>
         <Select
           onChange={handleChange}
           options={coordinators}
@@ -58,12 +78,12 @@ const Form = () => {
       </Wrapper>
 
       <Wrapper>
-        <Label htmlFor="responsible">Responsibility</Label>
+        <Label htmlFor="category_id">Categories</Label>
 
         <Select
           onChange={handleChange}
-          options={responsible}
-          name="responsible"
+          options={categories}
+          name="category_id"
         />
       </Wrapper>
 
@@ -97,15 +117,15 @@ const Form = () => {
         <Checkbox
           name="paid_event"
           onChange={handleChange}
-          checked={form.paid_event ? 'on' : 'off'}
-          value={form.paid_event ? 'on' : 'off'}
+          checked={form.paid_event ? 'checked' : ''}
+          value={form.paid_event}
         />
-        <Label htmlFor="paid event">Payment</Label>
+        <Label htmlFor="paid_event">Payment</Label>
       </Row>
 
-      {form.paid_event && ( // switch to true, temporary for testing here
+      {form.paid_event && (
         <Wrapper>
-          <Label htmlFor="event fee">Event Fee</Label>
+          <Label htmlFor="event_fee">Event Fee</Label>
           <Input
             onChange={handleChange}
             placeholder="[numbers here]"
@@ -132,7 +152,7 @@ const Form = () => {
         <Input
           onChange={handleChange}
           name="date"
-          // pattern={datePattern}
+          pattern={DATE_PATTERN}
           required
           type="date"
           value={form.date}
@@ -140,7 +160,7 @@ const Form = () => {
         <Input
           onChange={handleChange}
           name="time"
-          // pattern={timePattern}
+          pattern={TIME_PATTERN}
           type="time"
         />
       </Wrapper>
@@ -163,9 +183,7 @@ const Form = () => {
         </Modal>
       )}
 
-      <Row>
-        <Button label="Submit" type="submit" />
-      </Row>
+      <Button label="Submit" type="submit" />
     </form>
   );
 };

@@ -1,8 +1,8 @@
 import {
   FETCH_COORDINATORS,
-  FETCH_RESPONSIBLE,
+  FETCH_CATEGORIES,
   COORDINATOR_URL,
-  RESPONSIBLE_URL,
+  CATEGORY_URL,
 } from '../constants';
 
 export const fetchCoordinators = () => async (dispatch) => {
@@ -15,12 +15,12 @@ export const fetchCoordinators = () => async (dispatch) => {
   });
 };
 
-export const fetchResponsible = () => async (dispatch) => {
-  const response = await fetch(RESPONSIBLE_URL);
+export const fetchCategories = () => async (dispatch) => {
+  const response = await fetch(CATEGORY_URL);
   const jsonResponse = await response.json();
 
   dispatch({
-    type: FETCH_RESPONSIBLE,
+    type: FETCH_CATEGORIES,
     payload: jsonResponse,
   });
 };

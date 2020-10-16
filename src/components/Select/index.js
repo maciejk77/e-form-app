@@ -5,20 +5,16 @@ import { StyledSelect, StyledOption } from './styles';
 const Select = ({ name, options, onChange }) => {
   const hasLastName = options.every((option) => LAST_NAME in option);
 
-  const formattedOptions = options.reduce((acc, el) => {
-    const newName = `${hasLastName ? `${el.name} ${el.lastname}` : el.name}`;
-    return [...acc, { id: el.id, name: newName, email: el.email }];
+  const formattedOptions = options.reduce((acc, opt) => {
+    const newName = `${hasLastName ? `${opt.name} ${opt.lastname}` : opt.name}`;
+    return [...acc, { id: opt.id, name: newName, email: opt.email }];
   }, []);
 
   return (
-    <StyledSelect
-      name={name}
-      onChange={onChange}
-      // value={type}
-    >
+    <StyledSelect name={name} onChange={onChange}>
       <StyledOption value="">--- select here ---</StyledOption>
       {formattedOptions.map((option) => (
-        <StyledOption key={option.id} value={JSON.stringify(option)}>
+        <StyledOption key={option.id} value={option.id}>
           {option.name}
         </StyledOption>
       ))}
