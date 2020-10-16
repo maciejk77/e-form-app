@@ -1,7 +1,6 @@
 export const ADD_EVENT = 'ADD_EVENT';
 export const FETCH_COORDINATORS = 'FETCH_COORDINATORS';
 export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
-export const UPDATE_FORM = 'UPDATE_FORM';
 
 export const FORM_NAMES = {
   DURATION: 'duration',

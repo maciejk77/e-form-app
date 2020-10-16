@@ -1,4 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import useForm from '../../hooks/useForm';
+import { fetchCoordinators, fetchCategories } from '../../actions';
+import format from '../utils/format';
+import showSubmit from '../utils/showSubmit';
+import { DATE_PATTERN, TIME_PATTERN } from '../../constants';
 
 import Button from '../Button';
 import Checkbox from '../Checkbox';
@@ -9,59 +15,26 @@ import Row from '../Row';
 import Select from '../Select';
 import Textarea from '../Textarea';
 import Wrapper from '../Wrapper';
-import useStyles from './styles';
-
-import {
-  ADD_EVENT,
-  DATE_PATTERN,
-  TIME_PATTERN,
-  UPDATE_FORM,
-} from '../../constants';
-
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchCoordinators, fetchCategories } from '../../actions';
 
 const Form = () => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
+  const { handleChange, handleSubmit, form } = useForm(showSubmit, format);
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCoordinators());
     dispatch(fetchCategories());
   }, [dispatch]);
 
-  console.log(
-    'EVENTS => ',
-    useSelector((state) => state.events)
-  );
+  // console.log('FORM ==> ', form);
 
-  const form = useSelector((state) => state.form);
+  // console.log(
+  //   'STATE => ',
+  //   useSelector((state) => state)
+  // );
+
   const coordinators = useSelector((state) => state.coordinators);
   const categories = useSelector((state) => state.categories);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    dispatch({
-      type: UPDATE_FORM,
-      payload: { name, value },
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const { date, time } = form;
-    const newDate = `${date}T${time}`;
-    delete form.time;
-    const output = { ...form, date: newDate };
-
-    // setIsOpen(true);
-    console.clear();
-    console.log('--- output after SUBMIT ---');
-    console.log(output);
-    dispatch({ type: ADD_EVENT, payload: output });
-  };
 
   return (
     <form
