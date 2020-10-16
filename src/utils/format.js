@@ -1,4 +1,4 @@
-import { FORM_NAMES } from '../../constants';
+import { FORM_NAMES } from '../constants';
 
 const format = (state, name, value) => {
   switch (name) {
