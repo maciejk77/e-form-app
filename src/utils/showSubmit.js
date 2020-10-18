@@ -6,6 +6,9 @@ const showSubmit = (output) => {
   const newOutput = { ...output, date: joinedDateTime };
 
   console.log('--- SUBMITTED --- ', newOutput);
+
+  // persisting the form state after submission to localStorage
+  localStorage.setItem('persisted-form', JSON.stringify(newOutput));
 };
 
 export default showSubmit;

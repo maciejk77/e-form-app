@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import { fetchCoordinators, fetchCategories } from '../../actions';
@@ -26,12 +26,19 @@ const Form = () => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
-  console.log('FORM ==> ', form);
+  // console.log('FORM ==> ', form);
 
   // console.log(
   //   'STATE => ',
   //   useSelector((state) => state)
   // );
+
+  useEffect(() => {
+    console.log(
+      '>> localStorage last persisted form <<',
+      JSON.parse(localStorage.getItem('persisted-form'))
+    );
+  }, []);
 
   const coordinators = useSelector((state) => state.coordinators);
   const categories = useSelector((state) => state.categories);
