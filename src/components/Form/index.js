@@ -1,24 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import { fetchCoordinators, fetchCategories } from '../../actions';
-import format from '../../utils/format';
-import showSubmit from '../../utils/showSubmit';
+import { format } from '../../utils/format';
 import { DATE_PATTERN, TIME_PATTERN } from '../../constants/index';
 
 import Button from '../Button';
 import Checkbox from '../Checkbox';
 import Input from '../Input';
 import Label from '../Label';
-// import Modal from '../Modal/index';
+import Modal from '../Modal/index';
 import Row from '../Row';
 import Select from '../Select';
 import Textarea from '../Textarea';
 import Wrapper from '../Wrapper';
 
 const Form = () => {
-  const { handleChange, handleSubmit, form } = useForm(showSubmit, format);
-  // const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const { handleChange, handleSubmit, form } = useForm(setIsOpen, format);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,11 +26,6 @@ const Form = () => {
   }, [dispatch]);
 
   // console.log('FORM ==> ', form);
-
-  // console.log(
-  //   'STATE => ',
-  //   useSelector((state) => state)
-  // );
 
   useEffect(() => {
     console.log(
@@ -155,13 +149,13 @@ const Form = () => {
           value={form.duration}
         />
       </Wrapper>
-      {/* 
+
       {isOpen && (
         <Modal onClick={() => setIsOpen(false)}>
           <Label>Success!</Label>
           <Label>Thank you for adding an event</Label>
         </Modal>
-      )} */}
+      )}
 
       <Button label="Submit" type="submit" />
     </form>

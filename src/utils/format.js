@@ -1,9 +1,7 @@
 import { FORM_NAMES } from '../constants';
 // import moment from 'moment';
 
-const format = (state, name, value) => {
-  console.log('name => ', name);
-
+export const format = (state, name, value) => {
   switch (name) {
     case FORM_NAMES.DURATION:
     case FORM_NAMES.EVENT_FEE:
@@ -37,4 +35,19 @@ const format = (state, name, value) => {
   }
 };
 
-export default format;
+// Date-Time hack until solution found above
+export const removeTimeProp = (form) => {
+  let { date, time } = form;
+
+  if (time === undefined) {
+    time = 'HH:mm';
+  }
+  if (date === undefined) {
+    date = 'YYYY-MM-DD';
+  }
+
+  const joinedDateTime = `${date}T${time}`;
+  delete form.time;
+  const newOutput = { ...form, date: joinedDateTime };
+  return newOutput;
+};

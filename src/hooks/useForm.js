@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { INITIAL_DATA } from '../constants';
 import { useSelector } from 'react-redux';
+import { INITIAL_DATA } from '../constants';
+import { removeTimeProp } from '../utils/format';
 
 const useForm = (callback, format) => {
   const [form, setForm] = useState(INITIAL_DATA);
@@ -8,7 +9,13 @@ const useForm = (callback, format) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    callback(form);
+
+    const output = removeTimeProp(form);
+    console.log('--- SUBMITTED --- ', output);
+    // persisting the form state after submission to localStorage
+
+    localStorage.setItem('persisted-form', JSON.stringify(output));
+    callback(true);
   };
 
   const handleChange = (e) => {
