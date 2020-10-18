@@ -1,11 +1,20 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Form from './components/Form';
+import Confirmation from './components/Confirmation';
 
 const App = () => {
   return (
     <div style={inlineStyles.app}>
-      <h1 style={inlineStyles.header}>events form</h1>
-      <Form />
+      <Router>
+        <Switch>
+          <Route path="/" exact>
+            <h1 style={inlineStyles.header}>events form</h1>
+            <Form />
+          </Route>
+          <Route path="/confirmation" exact component={Confirmation} />
+        </Switch>
+      </Router>
     </div>
   );
 };

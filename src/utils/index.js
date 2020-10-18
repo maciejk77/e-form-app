@@ -9,6 +9,9 @@ export const format = (state, name, value) => {
     case FORM_NAMES.CATEGORY:
       return Number(value);
 
+    case FORM_NAMES.TITLE:
+      return String(value);
+
     // case FORM_NAMES.DATE:
     // case FORM_NAMES.TIME:
     //   const [date, time] = moment(value).format('YYYY-MM-DDTHH:mm').split('T');
@@ -50,4 +53,9 @@ export const removeTimeProp = (form) => {
   delete form.time;
   const newOutput = { ...form, date: joinedDateTime };
   return newOutput;
+};
+
+export const validate = (form) => {
+  const { title, description, date, coordinator } = form;
+  return ![title, description, date, coordinator].includes('');
 };

@@ -10,6 +10,7 @@ export const FORM_NAMES = {
   PAID_EVENT: 'paid_event',
   REWARD: 'reward',
   TIME: 'time',
+  TITLE: 'title',
 };
 
 const BASE_URL = 'http://www.mocky.io/v2';
@@ -28,10 +29,7 @@ export const INITIAL_DATA = {
   reward: '',
   date: '',
   duration: '',
-  coordinator: {
-    email: '',
-    id: '',
-  },
+  coordinator: '',
 };
 
 export const TIME_PATTERN = /^([0-1]\d|20|21|22|23):[0-5]\d$/;

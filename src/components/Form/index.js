@@ -1,31 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
 import { fetchCoordinators, fetchCategories } from '../../actions';
-import { format } from '../../utils/format';
+import { format, validate } from '../../utils';
 import { DATE_PATTERN, TIME_PATTERN } from '../../constants/index';
 
 import Button from '../Button';
 import Checkbox from '../Checkbox';
 import Input from '../Input';
 import Label from '../Label';
-import Modal from '../Modal/index';
 import Row from '../Row';
 import Select from '../Select';
 import Textarea from '../Textarea';
 import Wrapper from '../Wrapper';
 
 const Form = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const { handleChange, handleSubmit, form } = useForm(setIsOpen, format);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { handleChange, handleSubmit, form } = useForm(
+    setIsSubmitting,
+    format,
+    validate
+  );
 
   useEffect(() => {
     dispatch(fetchCoordinators());
     dispatch(fetchCategories());
   }, [dispatch]);
 
-  // console.log('FORM ==> ', form);
+  useEffect(() => {
+    if (isSubmitting) {
+      history.push('/confirmation');
+    }
+  }, [isSubmitting, history]);
 
   useEffect(() => {
     console.log(
@@ -38,16 +47,14 @@ const Form = () => {
   const categories = useSelector((state) => state.categories);
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{ display: 'flex', flexDirection: 'column' }}
-    >
+    <form onSubmit={handleSubmit}>
       <Wrapper>
         <Label htmlFor="coordinator">Coordinators</Label>
         <Select
           onChange={handleChange}
           options={coordinators}
           name="coordinator"
+          required
         />
       </Wrapper>
 
@@ -149,13 +156,6 @@ const Form = () => {
           value={form.duration}
         />
       </Wrapper>
-
-      {isOpen && (
-        <Modal onClick={() => setIsOpen(false)}>
-          <Label>Success!</Label>
-          <Label>Thank you for adding an event</Label>
-        </Modal>
-      )}
 
       <Button label="Submit" type="submit" />
     </form>
