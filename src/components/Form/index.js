@@ -26,7 +26,7 @@ const Form = () => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
-  // console.log('FORM ==> ', form);
+  console.log('FORM ==> ', form);
 
   // console.log(
   //   'STATE => ',

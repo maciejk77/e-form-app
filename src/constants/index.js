@@ -2,12 +2,14 @@ export const FETCH_COORDINATORS = 'FETCH_COORDINATORS';
 export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
 
 export const FORM_NAMES = {
+  CATEGORY: 'category_id',
+  COORDINATOR: 'coordinator',
+  DATE: 'date',
   DURATION: 'duration',
   EVENT_FEE: 'event_fee',
   PAID_EVENT: 'paid_event',
-  CATEGORY: 'category_id',
   REWARD: 'reward',
-  COORDINATOR: 'coordinator',
+  TIME: 'time',
 };
 
 const BASE_URL = 'http://www.mocky.io/v2';
