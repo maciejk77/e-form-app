@@ -56,9 +56,11 @@ export const removeTimeProp = (form) => {
 };
 
 export const validate = (form) => {
-  const { title, description, date, coordinator } = form;
+  const { title, description, date, coordinator, event_fee, paid_event } = form;
 
-  return ![title, description, date, coordinator].includes('');
+  const hasEventFee = paid_event ? event_fee !== '' : true;
+
+  return ![title, description, date, coordinator].includes('') && hasEventFee;
 };
 
 export const getErrorMessages = ({
@@ -67,8 +69,11 @@ export const getErrorMessages = ({
   date,
   coordinator,
   event_fee,
+  paid_event,
 }) => {
   let errors = {};
+  console.log('paid_event => ', paid_event);
+  console.log('event_fee => ', `"${event_fee}"`);
 
   if (event_fee === '') errors.event_fee = 'event fee is required';
   if (title === '') errors.title = 'title is required';
