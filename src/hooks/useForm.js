@@ -10,8 +10,6 @@ const useForm = (callback, format, validate) => {
   const state = useSelector((state) => state);
 
   const handleChange = (e) => {
-    e.preventDefault();
-
     const { name, value } = e.target;
     const formattedValue = format(state, name, value);
     setForm({ ...form, [name]: formattedValue });
