@@ -3,10 +3,10 @@ import styled from 'styled-components';
 export const StyledApp = styled.div`
   background-color: ${({ theme }) => theme.colors.base1};
   color: ${({ theme }) => theme.colors.base2};
-  padding: 20px;
   margin: 0 auto;
-  max-width: 768px;
   min-width: 204px;
+  max-width: 768px;
+  padding: 20px;
 `;
 
 export const StyledHeader = styled.h1`

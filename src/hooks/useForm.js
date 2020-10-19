@@ -26,10 +26,11 @@ const useForm = (callback, format, validate) => {
     if (isValidated) {
       const output = removeTimeProp(form);
       console.log('--- SUBMITTED --- ', output);
-      // persisting the form state after submission to localStorage
 
+      // not persisted though, just to illustrate normal Redux flow
       dispatch({ type: 'ADD_EVENT', payload: form });
 
+      // persisting the form state after submission to localStorage
       localStorage.setItem('persisted-form', JSON.stringify(output));
       callback(true);
     }

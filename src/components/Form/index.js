@@ -43,8 +43,8 @@ const Form = () => {
     );
   }, []);
 
-  const coordinators = useSelector((state) => state.coordinators);
   const categories = useSelector((state) => state.categories);
+  const coordinators = useSelector((state) => state.coordinators);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -52,9 +52,9 @@ const Form = () => {
         <Label htmlFor="coordinator">Coordinators</Label>
         <Select
           error={errors.coordinator}
+          name="coordinator"
           onChange={handleChange}
           options={coordinators}
-          name="coordinator"
         />
       </Wrapper>
 
@@ -62,9 +62,9 @@ const Form = () => {
         <Label htmlFor="category_id">Categories</Label>
 
         <Select
+          name="category_id"
           onChange={handleChange}
           options={categories}
-          name="category_id"
         />
       </Wrapper>
 
@@ -72,9 +72,9 @@ const Form = () => {
         <Label htmlFor="title">Title</Label>
         <Input
           error={errors.title}
+          name="title"
           onChange={handleChange}
           placeholder="[text here]"
-          name="title"
           type="text"
           value={form.title}
         />
@@ -84,10 +84,10 @@ const Form = () => {
         <Label htmlFor="description">Description</Label>{' '}
         <Textarea
           error={errors.description}
+          maxLength={140}
+          name="description"
           onChange={handleChange}
           placeholder="[text here]"
-          name="description"
-          maxLength={140}
           type="text"
           value={form.description}
         />
@@ -96,9 +96,9 @@ const Form = () => {
 
       <Row>
         <Checkbox
+          checked={form.paid_event ? 'checked' : ''}
           name="paid_event"
           onChange={handleChange}
-          checked={form.paid_event ? 'checked' : ''}
           value={form.paid_event}
         />
         <Label htmlFor="paid_event">Payment</Label>
@@ -110,9 +110,9 @@ const Form = () => {
             <Label htmlFor="event_fee">Event Fee</Label>
             <Input
               error={errors.event_fee}
+              name="event_fee"
               onChange={handleChange}
               placeholder="[numbers here]"
-              name="event_fee"
               type="number"
               value={form.event_fee}
             />
@@ -123,9 +123,9 @@ const Form = () => {
       <Wrapper>
         <Label htmlFor="reward">Reward</Label>
         <Input
+          name="reward"
           onChange={handleChange}
           placeholder="[numbers here]"
-          name="reward"
           type="number"
           value={form.reward}
         />
@@ -135,16 +135,16 @@ const Form = () => {
         <Label htmlFor="date">Date</Label>
         <Input
           error={errors.date}
-          onChange={handleChange}
           name="date"
+          onChange={handleChange}
           pattern={DATE_PATTERN}
           type="date"
           value={form.date}
         />
 
         <Input
-          onChange={handleChange}
           name="time"
+          onChange={handleChange}
           pattern={TIME_PATTERN}
           type="time"
         />
@@ -153,9 +153,9 @@ const Form = () => {
       <Wrapper>
         <Label htmlFor="duration">Duration</Label>
         <Input
+          name="duration"
           onChange={handleChange}
           placeholder="[numbers here]"
-          name="duration"
           type="number"
           value={form.duration}
         />

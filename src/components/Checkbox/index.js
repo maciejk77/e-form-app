@@ -3,12 +3,12 @@ import styled from 'styled-components';
 
 const StyledCheckbox = styled.input``;
 
-const Checkbox = ({ onChange, checked, name, value }) => (
+const Checkbox = ({ checked, onChange, name, value }) => (
   <StyledCheckbox
-    name={name}
-    type="checkbox"
     checked={checked}
+    name={name}
     onChange={onChange}
+    type="checkbox"
     value={value}
   />
 );
