@@ -16,6 +16,7 @@ const Confirmation = () => {
     <Wrapper>
       <div style={styles.inlineStyles}>
         <Button onClick={handleClick} label="Back" />
+        <Label>SUCCESS!</Label>
         <Label>Thank you for your submission!</Label>
         <Label>Click above to come back to events form</Label>
       </div>

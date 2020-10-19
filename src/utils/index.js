@@ -57,5 +57,24 @@ export const removeTimeProp = (form) => {
 
 export const validate = (form) => {
   const { title, description, date, coordinator } = form;
+
   return ![title, description, date, coordinator].includes('');
+};
+
+export const getErrorMessages = ({
+  title,
+  description,
+  date,
+  coordinator,
+  event_fee,
+}) => {
+  let errors = {};
+
+  if (event_fee === '') errors.event_fee = 'event fee is required';
+  if (title === '') errors.title = 'title is required';
+  if (description === '') errors.description = 'description is required';
+  if (date === '') errors.date = 'date is required';
+  if (coordinator === '') errors.coordinator = 'coordinator is required';
+
+  return errors;
 };

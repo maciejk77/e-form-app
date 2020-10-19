@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const StyledTextarea = styled.textarea`
   background: plum;
-  border: 3px solid #f8dd74;
+  border: ${(props) => (props.error ? '3px solid red' : '3px solid #f8dd74')};
   color: indigo;
   font-family: 'Lato';
   font-size: 15px;

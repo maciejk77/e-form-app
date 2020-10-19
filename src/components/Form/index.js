@@ -19,7 +19,7 @@ const Form = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { handleChange, handleSubmit, form } = useForm(
+  const { form, handleChange, handleSubmit, errors } = useForm(
     setIsSubmitting,
     format,
     validate
@@ -51,10 +51,10 @@ const Form = () => {
       <Wrapper>
         <Label htmlFor="coordinator">Coordinators</Label>
         <Select
+          error={errors.coordinator}
           onChange={handleChange}
           options={coordinators}
           name="coordinator"
-          required
         />
       </Wrapper>
 
@@ -71,11 +71,11 @@ const Form = () => {
       <Wrapper>
         <Label htmlFor="title">Title</Label>
         <Input
+          error={errors.title}
           onChange={handleChange}
           placeholder="[text here]"
           name="title"
           type="text"
-          required
           value={form.title}
         />
       </Wrapper>
@@ -83,11 +83,11 @@ const Form = () => {
       <Wrapper>
         <Label htmlFor="description">Description</Label>{' '}
         <Textarea
+          error={errors.description}
           onChange={handleChange}
           placeholder="[text here]"
           name="description"
           maxLength={140}
-          required
           type="text"
           value={form.description}
         />
@@ -105,16 +105,19 @@ const Form = () => {
       </Row>
 
       {form.paid_event && (
-        <Wrapper>
-          <Label htmlFor="event_fee">Event Fee</Label>
-          <Input
-            onChange={handleChange}
-            placeholder="[numbers here]"
-            name="event_fee"
-            type="number"
-            value={form.event_fee}
-          />
-        </Wrapper>
+        <>
+          <Wrapper>
+            <Label htmlFor="event_fee">Event Fee</Label>
+            <Input
+              error={errors.event_fee}
+              onChange={handleChange}
+              placeholder="[numbers here]"
+              name="event_fee"
+              type="number"
+              value={form.event_fee}
+            />
+          </Wrapper>
+        </>
       )}
 
       <Wrapper>
@@ -131,13 +134,14 @@ const Form = () => {
       <Wrapper>
         <Label htmlFor="date">Date</Label>
         <Input
+          error={errors.date}
           onChange={handleChange}
           name="date"
           pattern={DATE_PATTERN}
-          required
           type="date"
           value={form.date}
         />
+
         <Input
           onChange={handleChange}
           name="time"
@@ -157,7 +161,9 @@ const Form = () => {
         />
       </Wrapper>
 
-      <Button label="Submit" type="submit" />
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Button label="Submit" type="submit" />
+      </div>
     </form>
   );
 };
