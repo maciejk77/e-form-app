@@ -72,8 +72,6 @@ export const getErrorMessages = ({
   paid_event,
 }) => {
   let errors = {};
-  console.log('paid_event => ', paid_event);
-  console.log('event_fee => ', `"${event_fee}"`);
 
   if (event_fee === '') errors.event_fee = 'event fee is required';
   if (title === '') errors.title = 'title is required';
