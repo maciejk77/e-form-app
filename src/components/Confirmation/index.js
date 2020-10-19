@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Button from '../Button';
 import Label from '../Label';
 import Wrapper from '../Wrapper';
+import Container from './styles';
 
 const Confirmation = () => {
   const history = useHistory();
@@ -14,24 +15,14 @@ const Confirmation = () => {
 
   return (
     <Wrapper>
-      <div style={styles.inlineStyles}>
+      <Container>
         <Button onClick={handleClick} label="Back" />
         <Label>SUCCESS!</Label>
         <Label>Thank you for your submission!</Label>
         <Label>Click above to come back to events form</Label>
-      </div>
+      </Container>
     </Wrapper>
   );
-};
-
-const styles = {
-  inlineStyles: {
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    padding: '200px 0',
-  },
 };
 
 export default Confirmation;

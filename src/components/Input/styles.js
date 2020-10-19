@@ -2,10 +2,11 @@ import styled from 'styled-components';
 
 const StyledInput = styled.input`
   background: plum;
-  border: ${(props) => (props.error ? '3px solid red' : '3px solid #f8dd74')};
+  border: ${({ error, theme }) =>
+    `3px solid ${error ? theme.colors.error : theme.colors.base2}`};
   color: indigo;
-  font-family: 'Lato';
-  font-size: 15px;
+  font-family: ${({ theme }) => theme.fonts.base2};
+  font-size: ${({ theme }) => theme.fontSize.small};
   font-weight: bold;
   margin-bottom: 5px;
   outline: none;

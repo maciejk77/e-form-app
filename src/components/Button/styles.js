@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 const StyledButton = styled.button`
   align-self: center;
-  background-color: #7a59e4;
-  border: 3px solid #f8dd74;
-  color: #f8dd74;
-  font-family: 'BioRhyme';
-  font-size: 20px;
+  background-color: ${({ theme }) => theme.colors.base1};
+  border: 3px solid ${({ theme }) => theme.colors.base2};
+  color: ${({ theme }) => theme.colors.base2};
+  font-family: ${({ theme }) => theme.fonts.base1};
+  font-size: ${({ theme }) => theme.fontSize.medium};
   margin: 25px 0;
   outline: none;
   padding: 5px;

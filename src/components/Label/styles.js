@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const StyledLabel = styled.label`
-  font-size: 20px;
-  font-family: 'BioRhyme';
+  font-size: ${({ theme }) => theme.fontSize.medium};
+  font-family: ${({ theme }) => theme.fonts.base1};
   padding: 5px;
 `;
 

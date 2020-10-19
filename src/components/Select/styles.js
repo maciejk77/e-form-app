@@ -2,15 +2,16 @@ import styled from 'styled-components';
 
 export const StyledSelect = styled.select`
   background: plum;
-  border: ${(props) => (props.error ? '3px solid red' : '3px solid #f8dd74')};
-  color: indigo;
-  font-family: 'Lato';
-  font-size: 15px;
+  border: ${({ error, theme }) =>
+    `3px solid ${error ? theme.colors.error : theme.colors.base2}`};
+  color: ${({ theme }) => theme.colors.font1};
+  font-family: ${({ theme }) => theme.fonts.base2};
+  font-size: ${({ theme }) => theme.fontSize.small};
   font-weight: bold;
   outline: none;
   padding: 5px;
 `;
 
 export const StyledOption = styled.option`
-  font-size: 25px;
+  font-size: ${({ theme }) => theme.fontSize.large};
 `;
