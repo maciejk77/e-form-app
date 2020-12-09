@@ -7,7 +7,8 @@
 - Redux hooks (e.g. useSelector, useDispatch)
 - Styled components, theme
 - Native fetch to get data from API
-- Form validation, utils to format output data e.g. find, reduce, every
+- Form validation and rules
+- Utils to format output data, usage of e.g. find, reduce, every etc.
 
 ## Screenshots
 
